@@ -1,0 +1,1 @@
+Total number of months: 86; Net total amount of profits/losses over entire period: 38382578.0; Average of the changes in profits/losses over entire period: 446309.0465116279; Greatest increase in profits: (Date) Feb-12 (Profit) 1926159.0; Greatest decrease in losses: (Date) Sep-13 (Loss) -2196167.0
