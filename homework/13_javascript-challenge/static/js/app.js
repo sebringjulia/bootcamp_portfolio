@@ -18,38 +18,34 @@ for (i = 0; i < data.length; i++) {
    };
 }
 
+
 // Filter the table based on the user's date input
-var dateInput = d3.select("input");
-var button = d3.select("#filter-btn");
+
+// Extract user's date input
+// var dateInput = d3.select("input").property("value");
+var dateInput = "1/11/2010"
 
 function handleClick() {
-    // Extract user's date input
-    var dateInput = d3.select("input").property("value");
-    return dateInput;
+    console.log("Button clicked");
     console.log(dateInput);
-}
-    // Filter to the date input
-/*     var sighting = data
-    filteredData = sighting.filter(record => record.datetime === dateInput);
-    console.log(filteredData);
-    return filteredData; */
-
-button.on("click", handleClick);
-
-function filter() {
+    return dateInput;
     
 }
 
-/* function selectDate(record) {
-    var test = record.timedate === dateInput;
-    return test;
+// Create button click event
+var button = d3.select("#filter-btn");
+button.on("click", handleClick);
+
+console.log(tableData.filter(handleClick));
+
+
+function filteredDate(sighting) {
+    return sighting.datetime === dateInput;
 }
 
-var filteredSightings = data.filter(selectDate);
+var filteredSightings = tableData.filter(filteredDate);
 
-// Test
-console.log(filteredSightings); */
-
+console.log(filteredSightings);
 // Q's
 // typos in the data -- clean it?
 // make the data format have consistent capitalization?
