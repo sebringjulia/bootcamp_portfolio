@@ -18,27 +18,25 @@ for (i = 0; i < data.length; i++) {
    };
 }
 
-
 // Filter the table based on the user's date input
 
 // Extract user's date input
-// var dateInput = d3.select("input").property("value");
+// var dateInput = d3.select("input");
 var dateInput = "1/11/2010"
 
 function handleClick() {
     console.log("Button clicked");
     console.log(dateInput);
-    return dateInput;
-    
+    tableBody.remove()
+    return dateInput;       
 }
 
 // Create button click event
 var button = d3.select("#filter-btn");
 button.on("click", handleClick);
 
-console.log(tableData.filter(handleClick));
-
-
+// Display filtered data in console
+//console.log(tableData.filter(handleClick));
 function filteredDate(sighting) {
     return sighting.datetime === dateInput;
 }
@@ -46,6 +44,32 @@ function filteredDate(sighting) {
 var filteredSightings = tableData.filter(filteredDate);
 
 console.log(filteredSightings);
+
+// Try to clear table with complete data
+
+// for (i = 0; i < data.length; i++) {
+//     index = data[i]; 
+//     indexValue = Object.values(index);
+    
+//     for (x=0; x < indexValue.lenghth; x++) {
+//         tableBody.deleteRow(index);
+//     }
+//  }
+// tableBody.remove()
+
+
+// Create new filtered table
+
+for (i = 0; i < filteredSightings.length; i++) {
+    index = filteredSightings[i]; 
+    indexValue = Object.values(index);
+    var row = tableBody.append("tr");
+ 
+    for (x = 0; x < indexValue.length; x++) {
+        row.append("td").text(indexValue[x]);
+    };
+ }
+
 // Q's
 // typos in the data -- clean it?
 // make the data format have consistent capitalization?
