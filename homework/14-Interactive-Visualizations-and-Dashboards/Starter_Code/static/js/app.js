@@ -1,46 +1,48 @@
-
 // Load data to DOM sample code------------------------------------------
 
+// Unpacking 
+// function unpack(rows, index) {
+//     return rows.map(function(row) {
+//         return row[index];
+//     })
+// }
+// // Initialize page with default plot
+// function init() {
+//     data = [{
+//         x: [1, 2, 3, 4, 5],
+//         y: [1, 2, 4, 8, 16] }];
+//     //.node() lets us access the value of the selected div
+//     var CHART = d3.selectAll("bar").node();
 
-// Initialize page with default plot
-function init() {
-    data = [{
-        x: [1, 2, 3, 4, 5],
-        y: [1, 2, 4, 8, 16] }];
-    //.node() lets us access the value of the selected div
-    var CHART = d3.selectAll("bar").node();
+//     Plotly.newPlot(CHART, data);
+// }
 
-    Plotly.newPlot(CHART, data);
-}
+// // Sample code to create switch function
+// // Make For Loop to create case for each test subject
+// function chooseLetter(letter) {
+//     switch(letter) {
+//         case "A":
+//           console.log(1);
+//           break;
+//         case "B":
+//           console.log(2);
+//           break;
+//         case "C":
+//           console.log(3);
+//           break;
+//         case "D":
+//           console.log(4);
+//           break;
+//         case "E":
+//           console.log(5);
+//           break;
 
-
-// Sample code to create switch function
-// Make For Loop to create case for each test subject
-function chooseLetter(letter) {
-    switch(letter) {
-        case "A":
-          console.log(1);
-          break;
-        case "B":
-          console.log(2);
-          break;
-        case "C":
-          console.log(3);
-          break;
-        case "D":
-          console.log(4);
-          break;
-        case "E":
-          console.log(5);
-          break;
-
-        default:
-          console.log(0);
-          break;
-    }
-}
-
-chooseLetter("F");
+//         default:
+//           console.log(0);
+//           break;
+//     }
+// }
+// chooseLetter("F");
 
 // End of sample code----------------------------------------------------
 
@@ -60,13 +62,16 @@ d3.json("data/samples.json").then((data) => {
         metadataObject.push(element);  
 
         var arr = [element.id];
-        var ul = d3.select("#selDataset").append("ul");
-        var selection = ul.selectAll("li")
-            .data(arr)
-            .enter()
-            .append("li")
+
+        var dropDown = d3.select("#selDataset").append("option")
+            .data([arr])
+            .attr("value", function(d) {
+                return d;
+                })
             .text(function(d) {
-                return d;})
+                return d;
+                    })
+            .enter() 
     }); 
 
 // Display the sample metadata, i.e., an individual's demographic information.
