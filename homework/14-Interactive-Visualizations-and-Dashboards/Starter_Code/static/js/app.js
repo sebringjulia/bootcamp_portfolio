@@ -1,11 +1,6 @@
 // Load data to DOM sample code------------------------------------------
 
-// Unpacking 
-// function unpack(rows, index) {
-//     return rows.map(function(row) {
-//         return row[index];
-//     })
-// }
+
 // // Initialize page with default plot
 // function init() {
 //     data = [{
@@ -17,40 +12,9 @@
 //     Plotly.newPlot(CHART, data);
 // }
 
-// // Sample code to create switch function
-// // Make For Loop to create case for each test subject
-// function chooseLetter(letter) {
-//     switch(letter) {
-//         case "A":
-//           console.log(1);
-//           break;
-//         case "B":
-//           console.log(2);
-//           break;
-//         case "C":
-//           console.log(3);
-//           break;
-//         case "D":
-//           console.log(4);
-//           break;
-//         case "E":
-//           console.log(5);
-//           break;
-
-//         default:
-//           console.log(0);
-//           break;
-//     }
-// }
-// chooseLetter("F");
 
 // End of sample code----------------------------------------------------
 
-
-// Function to extract id from metadata object
-function userId({id}) {
-    return id;
-}
 
 // Load data from json object
 d3.json("data/samples.json").then((data) => {
@@ -78,12 +42,12 @@ d3.json("data/samples.json").then((data) => {
 // Display each key-value pair from the metadata JSON object somewhere on the page.
 // Variables for metadata
 
-var ethnicity = `Ethnicity: ${metadataObject[0].ethnicity}`;
-var gender = `Gender: ${metadataObject[0].gender}`;
-var age = `Age: ${metadataObject[0].age}`;
-var location = `Location: ${metadataObject[0].location}`;
-var bbtype = `BB Type: ${metadataObject[0].bbtype}`;
-var wfreq = `WFreq: ${metadataObject[0].wfreq}`;    
+        var ethnicity = `Ethnicity: ${metadataObject[0].ethnicity}`;
+        var gender = `Gender: ${metadataObject[0].gender}`;
+        var age = `Age: ${metadataObject[0].age}`;
+        var location = `Location: ${metadataObject[0].location}`;
+        var bbtype = `BB Type: ${metadataObject[0].bbtype}`;
+        var wfreq = `WFreq: ${metadataObject[0].wfreq}`;    
 
         var arrMeta = [ethnicity, gender, age, location, bbtype, wfreq];
         var ul = d3.select("#sample-metadata").append("ul");
@@ -158,37 +122,68 @@ var wfreq = `WFreq: ${metadataObject[0].wfreq}`;
 
 // // Update all of the plots any time that a new sample is selected.
 
-// d3.selectAll("body").on("change", updatePlotly);
+d3.selectAll("body").on("change", optionChanged);
 
-// function updatePlotly() {
-//     var dropdownMenu = d3.select("#selDataset");
+function optionChanged() {
+    var dropdownMenu = d3.select("#selDataset");
 
-//     var dataset = dropdownMenu.node().value;
+    var dataset = dropdownMenu.node().value;
 
-//     var CHART = d3.selectAll("#plot").node();
+    var barCHART = d3.selectAll("#bar").node();
+    var bubbleCHART = d3.selectAll("#bubble").node();
+    // console.log(barCHART);
+    var x = [];
+    var y = [];
 
-//     var x = [];
-//     var y = [];
+    var indexTicker = 2;
+    // console.log("Index Ticker:", indexTicker);
+    // console.log("Data selected", data.samples[indexTicker].id);
+    // console.log("otu_ids", otu_ids[indexTicker]);
+    // console.log("sample_values:", sample_values[indexTicker]);
 
-//     switch(dataset) {
-//         case "dataset1":
-//             x = otu_ids;
-//             y = sample_value;
-//             break;
-//     }
-// }
+    switch(dataset) {
 
-// Plotly.restyle(CHART, "x", [x]);
-// Plotly.restyle(CHART, "y", [y]);
+        case "941":
+            x = otu_ids[1];
+            y = sample_values[1];
+            break;
+        case "943":
+            x = otu_ids[2];
+            y = sample_values[2];
+            break;
+        case "944":
+            x = otu_ids[3];
+            y = sample_values[3];
+            break;   
+        case "945":
+        x = otu_ids[4];
+        y = sample_values[4];
+            break; 
+        // case data.samples[indexTicker].id:
+        //     x = otu_ids[indexTicker];
+        //     y = sample_values[indexTicker];    
+        // case "940":
+        //     x = otu_ids[0];
+        //     y = sample_values[0];
+        default:
+            x = otu_ids[0];
+            y = sample_values[0];
+    }
+    Plotly.restyle(barCHART, "x", [x]);
+    Plotly.restyle(barCHART, "y", [y]);
+    Plotly.restyle(bubbleCHART, "x", [x]);
+    Plotly.restyle(bubbleCHART, "y", [y]);
 
 
-// });
+}
 
 
 }).catch(function(error) {
     console.log(error);
 });
 
+
+// init(); //Need to create this function
 
 
 // Deploy your app to a free static page hosting service, such as GitHub Pages. 
