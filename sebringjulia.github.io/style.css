@@ -3,3 +3,8 @@
     margin: 15px;
     color: rgb(59, 52, 97);
   }
+
+  @media (max-width: 600px) {
+    .nav-link {
+     background: yellow;
+   }
