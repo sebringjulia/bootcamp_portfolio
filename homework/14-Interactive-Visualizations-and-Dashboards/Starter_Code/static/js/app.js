@@ -1,20 +1,35 @@
-var index = 0;
-var metadataObject = []; 
-var sample_values = [];
-var otu_ids = [];
-var otu_labels = [];
+// Load data to DOM sample code------------------------------------------
+
+
+// // Initialize page with default plot
+// function init() {
+//     data = [{
+//         x: [1, 2, 3, 4, 5],
+//         y: [1, 2, 4, 8, 16] }];
+//     //.node() lets us access the value of the selected div
+//     var CHART = d3.selectAll("bar").node();
+
+//     Plotly.newPlot(CHART, data);
+// }
+
+
+// End of sample code----------------------------------------------------
+
 
 // Load data from json object
+
 d3.json("data/samples.json").then((data) => {
 
 
     // Extract id and add to drop-down
-    // var metadataObject = []; 
+    var metadataObject = []; 
     data.metadata.forEach((element, index) => {
         metadataObject.push(element);  
 
-        d3.select("#selDataset").append("option")
-            .data([[element.id]])
+        var arr = [element.id];
+
+        var dropDown = d3.select("#selDataset").append("option")
+            .data([arr])
             .attr("value", function(d) {
                 return d;
                 })
@@ -23,19 +38,17 @@ d3.json("data/samples.json").then((data) => {
                     })
             .enter() 
     }); 
-    
-
 
 // Display the sample metadata, i.e., an individual's demographic information.
 // Display each key-value pair from the metadata JSON object somewhere on the page.
 // Variables for metadata
 
-        var ethnicity = `Ethnicity: ${metadataObject[index].ethnicity}`;
-        var gender = `Gender: ${metadataObject[index].gender}`;
-        var age = `Age: ${metadataObject[index].age}`;
-        var location = `Location: ${metadataObject[index].location}`;
-        var bbtype = `BB Type: ${metadataObject[index].bbtype}`;
-        var wfreq = `WFreq: ${metadataObject[index].wfreq}`;    
+        var ethnicity = `Ethnicity: ${metadataObject[0].ethnicity}`;
+        var gender = `Gender: ${metadataObject[0].gender}`;
+        var age = `Age: ${metadataObject[0].age}`;
+        var location = `Location: ${metadataObject[0].location}`;
+        var bbtype = `BB Type: ${metadataObject[0].bbtype}`;
+        var wfreq = `WFreq: ${metadataObject[0].wfreq}`;    
 
         var arrMeta = [ethnicity, gender, age, location, bbtype, wfreq];
         var ul = d3.select("#sample-metadata").append("ul");
@@ -53,7 +66,9 @@ d3.json("data/samples.json").then((data) => {
 // Use sample_values as the values for the bar chart.
 // Use otu_ids as the labels for the bar chart.
 // Use otu_labels as the hovertext for the chart.
-
+    var sample_values = [];
+    var otu_ids = [];
+    var otu_labels = [];
 
     data.samples.forEach((element, index) => {
         sample_values.push(element.sample_values.slice(0,10).reverse());
@@ -61,12 +76,14 @@ d3.json("data/samples.json").then((data) => {
         otu_labels.push(element.otu_labels.slice(0, 10));
     })
 
+// Need to toggle trace by subject!
+
     var trace1 = {
-        x: otu_ids[index],
-        x: sample_values[index],
+        x: otu_ids[0],
+        x: sample_values[0],
     
         type: "bar",
-        text: otu_labels[index],
+        text: otu_labels[0],
         orientation: "h"
     };
 
@@ -79,16 +96,15 @@ d3.json("data/samples.json").then((data) => {
     };
 
     Plotly.newPlot("bar", data1, layout1);
-
-//  Create a bubble chart that displays each sample.
+//  Create a bubble chart that displays bacteria discovered.
 
     var trace2 = {
-        x: otu_ids[index],
-        y: sample_values[index],
+        x: otu_ids[0],
+        y: sample_values[0],
         mode: 'markers',
         marker: { 
-            size: sample_values[index],
-            color: otu_ids[index]},
+            size: sample_values[0],
+            color: otu_ids[0]},
         text: otu_labels,
         type: "scatter"
     };
@@ -110,10 +126,6 @@ d3.json("data/samples.json").then((data) => {
 d3.selectAll("body").on("change", optionChanged);
 
 function optionChanged() {
-    // Scrub unordered list items
-
-    
-
     var dropdownMenu = d3.select("#selDataset");
 
     var dataset = dropdownMenu.node().value;
@@ -124,7 +136,7 @@ function optionChanged() {
     var x = [];
     var y = [];
 
-    // var indexTicker = 2;
+    var indexTicker = 2;
     // console.log("Index Ticker:", indexTicker);
     // console.log("Data selected", data.samples[indexTicker].id);
     // console.log("otu_ids", otu_ids[indexTicker]);
