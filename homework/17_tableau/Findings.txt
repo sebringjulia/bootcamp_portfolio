@@ -1,0 +1,22 @@
+My story on Citi Bikes uses data from March, June, September, and December 
+of 2017 through 2019. The visualizations depict user gender, age, and type with respect to 
+weekday popularity, yearly and monthly growth, and station use.
+
+Two findings: 
+
+-- Weekday Ridership -- 
+Male riders' number of rides appears to be the inverse of riders who did not 
+specify their gender: male riders ride often on weekdays, perhaps to commute to work, but 
+subsequently drop off on weekends; rides taken by users of unknown gender dip on weekdays 
+and have upticks on weekends. In terms of trip duration, though, unknown riders dramatically
+spike to just exceed the level of male riders. So customers who don't list their gender 
+take more rides of longer duration on weekends. Women ride pretty consistently throughout the
+week, but do also increase in trip duration on weekends.
+
+-- Growth --
+Citi Bike's service is mainly used by subscribers and an increasing number of rides are also
+being taken by casual customers. Breaking down the rides by month, though, shows recent
+declines in the months of June and December. Though they may be due to unusual weather or 
+other factors, Citi Bikes should pay attention to any continuation of this decline in the 
+coming year; if rides by subscribers coninue to dip, overall growth will take a hit since
+our base is so dependent on this user type. 
